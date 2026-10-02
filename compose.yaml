@@ -8,7 +8,7 @@ services:
 
   node-api:
     build: .
-    container_name: pro_container
+    container_name: node-api-container
     ports:
       - "3000:3000"
     environment:
@@ -17,6 +17,12 @@ services:
       DB_NAME: practice
     depends_on:
       - mongodb
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
 volumes:
   mongo-data:
