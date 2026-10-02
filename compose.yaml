@@ -1,0 +1,22 @@
+services:
+
+  mongodb:
+    image: mongo:8
+    container_name: mongodb
+    volumes:
+      - mongo-data:/data/db
+
+  node-api:
+    build: .
+    container_name: pro_container
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      MONGO_URL: mongodb://mongodb:27017
+      DB_NAME: practice
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo-data:
