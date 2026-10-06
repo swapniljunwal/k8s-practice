@@ -1,7 +1,7 @@
 services:
 
   mongodb:
-    image: mongo:8
+    image: mongo:7
     container_name: mongodb
     volumes:
       - mongo-data:/data/db
@@ -10,6 +10,7 @@ services:
     build: .
     container_name: node-api-container
     restart: unless-stopped
+    mem_limit: 100m
     ports:
       - "3000:3000"
     environment:
