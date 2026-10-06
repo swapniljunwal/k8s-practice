@@ -9,6 +9,7 @@ services:
   node-api:
     build: .
     container_name: node-api-container
+    restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
