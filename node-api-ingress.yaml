@@ -8,14 +8,6 @@ spec:
     - host: node-api.local
       http:
         paths:
-          - path: /hello
-            pathType: Prefix
-            backend:
-              service:
-                name: hello
-                port:
-                  number: 80
-
           - path: /api
             pathType: Prefix
             backend:
