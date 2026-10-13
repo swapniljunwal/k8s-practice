@@ -19,6 +19,12 @@ spec:
           image: doproreg.azurecr.io/node-api:latest
           ports:
             - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
           env:
             - name: NODE_ENV
               value: "production"
