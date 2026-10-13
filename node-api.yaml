@@ -41,12 +41,12 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
           env:
-            - name: NODE_ENV
-              value: "production"
             - name: MONGO_URL
               value: "mongodb://mongodb:27017"
-            - name: DB_NAME
-              value: "practice"
+
+          envFrom:
+            - configMapRef:
+                name: node-api-config
 ---
 apiVersion: v1
 kind: Service
