@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-api
+  template:
+    metadata:
+      labels:
+        app: node-api
+    spec:
+      imagePullSecrets:
+        - name: acr-secret
+      containers:
+        - name: node-api
+          image: doproreg.azurecr.io/node-api:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: MONGO_URL
+              value: "mongodb://mongodb:27017"
+            - name: DB_NAME
+              value: "practice"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-api
+spec:
+  selector:
+    app: node-api
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: NodePort
