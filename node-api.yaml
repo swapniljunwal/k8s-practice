@@ -12,6 +12,8 @@ spec:
       labels:
         app: node-api
     spec:
+      securityContext:
+        runAsNonRoot: true
       imagePullSecrets:
         - name: acr-secret
       containers:
