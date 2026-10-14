@@ -21,6 +21,8 @@ spec:
       containers:
         - name: node-api
           image: doreg.azurecr.io/node-api:latest
+          securityContext:
+            allowPrivilegeEscalation: false
           ports:
             - containerPort: 3000
           resources:
