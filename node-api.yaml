@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: node-api
-    spec:
+    spec:                               # Pod level starts here
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
@@ -23,9 +23,14 @@ spec:
           image: doreg.azurecr.io/node-api:latest
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop:
                 - ALL
+          volumeMounts:                      # Container level
+            - name: tmp
+              mountPath: /tmp      
+          
           ports:
             - containerPort: 3000
           resources:
@@ -68,6 +73,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: node-api-config
+      volumes:                                   # Pod level
+        - name: tmp
+          emptyDir: {}          
 ---
 apiVersion: v1
 kind: Service
