@@ -16,7 +16,7 @@ spec:
         - name: acr-secret
       containers:
         - name: node-api
-          image: doproreg.azurecr.io/node-api:latest
+          image: doreg.azurecr.io/node-api:latest
           ports:
             - containerPort: 3000
           resources:
