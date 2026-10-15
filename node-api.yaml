@@ -11,7 +11,8 @@ spec:
     metadata:
       labels:
         app: node-api
-    spec:                               # Pod level starts here
+    spec:                                                  # Pod level starts here
+      automountServiceAccountToken: false                             
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
